@@ -293,8 +293,6 @@ class CallbackModule(CallbackBase):
         return host_string
 
     def v2_runner_on_ok(self, result):
-        if result._result.get('changed', False):
-            return
         # pylint: disable=I0011,W0201,
         duration = self._get_duration()
 
