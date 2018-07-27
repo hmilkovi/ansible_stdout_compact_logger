@@ -79,7 +79,6 @@ def deep_serialize(data, indent=0):
             return "\"\""
         else:
             return string_form
-
     return output
 
 
@@ -294,6 +293,8 @@ class CallbackModule(CallbackBase):
         return host_string
 
     def v2_runner_on_ok(self, result):
+        if result._result.get('changed', False):
+            return
         # pylint: disable=I0011,W0201,
         duration = self._get_duration()
 
@@ -357,8 +358,7 @@ class CallbackModule(CallbackBase):
                         (self._host_string(result), result._result.get('msg', '')), color=CHANGED)
 
     def v2_runner_on_skipped(self, result):
-        duration = self._get_duration()
-        self._task_level = 0
+        pass
 
     def v2_playbook_on_include(self, included_file):
         self._open_section("system")
