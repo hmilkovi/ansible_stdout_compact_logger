@@ -79,8 +79,7 @@ def deep_serialize(data, indent=0):
             return "\"\""
         else:
             return string_form
-    if "SKIPPED" in output:
-        return "..."
+
     return output
 
 
@@ -360,9 +359,6 @@ class CallbackModule(CallbackBase):
     def v2_runner_on_skipped(self, result):
         duration = self._get_duration()
         self._task_level = 0
-
-        self._emit_line("%s | SKIPPED | %dms" %
-                        (self._host_string(result), duration), color='cyan')
 
     def v2_playbook_on_include(self, included_file):
         self._open_section("system")
