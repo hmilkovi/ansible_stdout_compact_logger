@@ -79,6 +79,8 @@ def deep_serialize(data, indent=0):
             return "\"\""
         else:
             return string_form
+    if "SKIPPED" in output:
+        return "..."
     return output
 
 
